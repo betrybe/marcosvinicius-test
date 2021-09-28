@@ -1,7 +1,14 @@
 import React from 'react';
+import GlobalStyle from './styles/global';
+import Routes from './routes';
 
 function App() {
-  return <div>Hello, TrybeWallet!</div>;
+  return (
+    <>
+      <Routes />
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;

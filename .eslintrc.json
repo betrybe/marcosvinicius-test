@@ -3,7 +3,12 @@
     "browser": true,
     "es2020": true
   },
-  "extends": ["trybe-frontend"],
+  "rules": {
+    "prefer-default-export": false
+  },
+  "extends": [
+    "trybe-frontend"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

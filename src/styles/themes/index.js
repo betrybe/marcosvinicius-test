@@ -7,5 +7,6 @@ export default {
     textButton: '#333',
     borderBox: '#00000029',
     backgroundButton: '',
+    gray: 'gray'
   },
 };
