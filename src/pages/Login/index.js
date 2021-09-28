@@ -16,7 +16,7 @@ function Login() {
       <FLogoContainer>
         <FLogo alt={"Trybe"} src={TrybeLogo} />
       </FLogoContainer>
-      <FBlock className="txtb">
+      <FBlock>
         <FInput
           type="email"
           name="email"
@@ -25,14 +25,14 @@ function Login() {
         />
       </FBlock>
 
-      <div className="txtb">
+      <FBlock>
         <FInput
           type="password"
           name="password"
           placeholder="Senha"
           required
         />
-      </div>
+      </FBlock>
 
       <FButon type="submit" className="btn__customized">
         Entrar

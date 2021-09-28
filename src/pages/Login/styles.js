@@ -9,7 +9,7 @@ const FContainer = styled.form`
   box-sizing: border-box;
   border-radius:10px;
   border: 2px solid ${props => props.theme.colors.gray};
-  box-shadow: 1px 1px 15px rgba(0,0,0,.1);
+  box-shadow: 1px 1px 12px rgba(0,0,0,.1);
   position: absolute;
   left:50%;
   top:50%;
@@ -17,57 +17,63 @@ const FContainer = styled.form`
 `;
 
 const FLogoContainer = styled.div`
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
 `;
 
 const FLogo = styled.img`
   width: 100%;
-  height: 100px;
+  height: 100%;
+`;
+
+const FBlock = styled.div`
+  transition: .25s linear;
+  position: relative;
+  margin: 0px 0;
+  height: 40px;
+  border-radius: 5px;
+`;
+
+const FInput = styled.input`
+  transition: .1s all linear;
+  border: 0;
+  outline: none;
+  font-family: 'Roboto Condensed', sans-serif;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: inherit;
+
+  border: 1.8px solid ${props => props.theme.colors.gray};
+  &:focus {
+    border-color: ${p => p.theme.colors.primary};
+    border-width: 2px;
+    box-shadow: 10px 2px 35px rgba(255,255,255,.5)
+  }
 `;
 
 const FButon = styled.button`
   transition: .5s;
   width:100%;
-  font-size:1rem;
+  font-size: 14px;
   font-family:'Roboto Condensed', sans-serif;
-  color:#fff;
-  padding:12px 8px;
+  color: ${p => p.theme.colors.textButton};
+  padding: 12px 8px;
+  margin-top: 10px;
   border:none;
+  border-radius: 4px;
   outline:none;
   cursor:pointer;
-  background:linear-gradient(120deg, #3498db,#8244ad,#3498db);
+  background:linear-gradient(120deg, ${p => p.theme.colors.primary},${p => p.theme.colors.textPrimary},${p => p.theme.colors.primary});
   background-size:200%;
 
-  && {
-    &:hover{
-      background-position:right;
-    }
+  &:hover{
+    background-position:right;
   }
 `;
 
-const FInput = styled.input`
-  font-family: 'Roboto Condensed', sans-serif;
-  color:#000;
-  font-size:1rem;
-  border:none;
-  width:100%;
-  outline:none;
-  background:none;
-  padding:0 5px;
-  height: 40px;
-
-  && {
-    &::placeholder {
-      color: #000;
-    }
-  }
-`;
-
-const FBlock = styled.div`
-  border-bottom:2px solid #adadad;
-  position: relative;
-  margin:30px 0;
-`;
 
 export {
   FContainer,
