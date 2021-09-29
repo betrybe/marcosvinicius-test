@@ -11,8 +11,9 @@ import {
 } from './styles';
 
 function Login() {
+
   return (
-    <FContainer onSubmit={() => {}}>
+    <FContainer onClick={() => {}}>
       <FLogoContainer>
         <FLogo alt={"Trybe"} src={TrybeLogo} />
       </FLogoContainer>
@@ -34,7 +35,7 @@ function Login() {
         />
       </FBlock>
 
-      <FButon type="submit" className="btn__customized">
+      <FButon data-testid="my-action" type="submit" className="btn__customized">
         Entrar
       </FButon>
     </FContainer>

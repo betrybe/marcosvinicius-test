@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const FContainer = styled.form`
   width:360px;
-  background:#f4f4f4;
+  background: ${props => props.theme.colors.white};
   opacity: .8;
   height: max-content;
   padding: 80px 40px 70px 40px;

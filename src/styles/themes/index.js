@@ -6,6 +6,7 @@ export default {
     textSecondary: '#333',
     textButton: '#fff',
     borderColor: '#3498db',
-    gray: '#adadad'
+    gray: '#adadad',
+    white: '#f4f4f4'
   },
 };
