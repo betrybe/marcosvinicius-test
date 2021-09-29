@@ -14,7 +14,7 @@ function Header({ email, totalValue }) {
       <Logo src={TrybeLogo} />
       <Block>
         <Label>E-mail: {email}</Label>
-        <Label>Despesa Total: {totalValue}</Label>
+        <Label>Despesa Total: R$ {totalValue}</Label>
       </Block>
     </Container>
   );
