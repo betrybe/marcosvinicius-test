@@ -4,8 +4,8 @@ const FContainer = styled.form`
   width:360px;
   background:#f4f4f4;
   opacity: .8;
-  height:400px;
-  padding:80px 40px;
+  height: max-content;
+  padding: 80px 40px 70px 40px;
   box-sizing: border-box;
   border-radius:10px;
   border: 2px solid ${props => props.theme.colors.gray};
