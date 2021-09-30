@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 const FContainer = styled.form`
   width:360px;
-  background: ${props => props.theme.colors.white};
+  background: #f4f4f4;
   opacity: .8;
   height: max-content;
   padding: 80px 40px 70px 40px;
   box-sizing: border-box;
   border-radius:10px;
-  border: 2px solid ${props => props.theme.colors.gray};
+  border: 2px solid #adadad;
   box-shadow: 1px 1px 12px rgba(0,0,0,.1);
   position: absolute;
   left:50%;
@@ -46,9 +46,9 @@ const FInput = styled.input`
   text-align: center;
   border-radius: inherit;
 
-  border: 1.8px solid ${props => props.theme.colors.gray};
+  border: 1.8px solid #adadad;
   &:focus {
-    border-color: ${p => p.theme.colors.primary};
+    border-color: #3FB589;
     border-width: 2px;
     box-shadow: 10px 2px 35px rgba(255,255,255,.5)
   }
@@ -59,14 +59,14 @@ const FButon = styled.button`
   width:100%;
   font-size: 14px;
   font-family:'Roboto Condensed', sans-serif;
-  color: ${p => p.theme.colors.textButton};
+  color: #fff;
   padding: 12px 8px;
   margin-top: 10px;
   border:none;
   border-radius: 4px;
   outline:none;
-  cursor:pointer;
-  background:linear-gradient(120deg, ${p => p.theme.colors.primary},${p => p.theme.colors.textPrimary},${p => p.theme.colors.primary});
+  cursor: ${props => props.isDisabled ? 'not-allowed' : 'pointer'};
+  background: ${props => props.isDisabled ? 'gray' : 'linear-gradient(120deg, #3FB589, #000, #3FB589)'};
   background-size:200%;
 
   &:hover{

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../actions/user';
@@ -15,26 +15,56 @@ import {
 } from './styles';
 
 function Login() {
+  const patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const patternSenha = /^.{5,}$/;
+
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [isValid, setIsValid] = useState(true);
+  const [senhaInvalida, setSenhaInvalida] = useState(false);
+  const [emailInvalido, setEmailInvalido] = useState(false);
+  const [formValido, setFormValido] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (senha.length >= 6) {
+  const submit = () => {
+    if (formValido) {
       dispatch(userLogin(email));
-      setIsValid(true);
       history.push('/carteira');
-    } else {
-      setIsValid(false);
     }
   }
 
+  const handleChangePassword = (e) => {
+    setSenha(e.target.value);
+    if (senha.length >= 6 || patternSenha.test(senha)) {
+      setSenhaInvalida(false);
+    } else {
+      setSenhaInvalida(true);
+    }
+  }
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+    if (patternEmail.test(email)) {
+      setEmailInvalido(false);
+    } else {
+      setEmailInvalido(true);
+    }
+  }
+
+  useEffect(() => {
+    if (email !== '' && senha !== '') {
+      if (emailInvalido || senhaInvalida) {
+        setFormValido(false);
+      } else {
+        setFormValido(true);
+      }
+    }
+
+  }, [email, senha])
+
   return (
-    <FContainer onSubmit={handleLogin}>
+    <FContainer>
       <FLogoContainer>
         <FLogo alt={"Trybe"} src={TrybeLogo} />
       </FLogoContainer>
@@ -44,7 +74,7 @@ function Login() {
           name="email"
           placeholder="E-mail"
           data-testid="email-input"
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => handleChangeEmail(e)}
           required
         />
       </FBlock>
@@ -55,14 +85,18 @@ function Login() {
           name="password"
           placeholder="Senha"
           data-testid="password-input"
-          onChange={e => setSenha(e.target.value)}
+          onChange={e => handleChangePassword(e)}
           required
         />
       </FBlock>
-      {!isValid && (
+      {emailInvalido && (
+        <FErrorMessage>E-mail inválido</FErrorMessage>
+      )}
+      {senhaInvalida && (
         <FErrorMessage>A senha não pode ser menor que 6 caracteres</FErrorMessage>
       )}
-      <FButon data-testid="my-action" type="submit">
+
+      <FButon type="button" disabled={!formValido} isDisabled={!formValido} onClick={ submit }>
         Entrar
       </FButon>
     </FContainer>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.header`
-  background: ${props => props.theme.colors.white};
+  background: #f4f4f4;
   width: 100%;
   position: relative;
   display: flex;
