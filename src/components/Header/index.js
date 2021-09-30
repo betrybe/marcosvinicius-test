@@ -5,7 +5,8 @@ import {
   Container,
   Block,
   Label,
-  Logo
+  Logo,
+  Div
 } from './styles';
 
 function Header({ email, totalValue }) {
@@ -14,10 +15,10 @@ function Header({ email, totalValue }) {
       <Logo src={TrybeLogo} />
       <Block>
         <Label data-testid="email-field">E-mail: {email}</Label>
-        <div>
+        <Div>
           <Label data-testid="total-field">Despesa Total: R$ </Label>
           <Label data-testid="header-currency-field">{totalValue ? totalValue : 0} BRL</Label>
-        </div>
+        </Div>
       </Block>
     </Container>
   );

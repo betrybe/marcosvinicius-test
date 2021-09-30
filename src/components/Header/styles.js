@@ -29,9 +29,12 @@ const Logo = styled.img`
   height: max-content;
 `;
 
+const Div = styled.div``;
+
 export {
   Container,
   Block,
   Label,
-  Logo
+  Logo,
+  Div
 }
