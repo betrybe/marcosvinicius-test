@@ -3,10 +3,10 @@ export const ActionType = {
   LOGOUT: '@LOGOUT',
 }
 
-export function userLogin(payload) {
+export function userLogin(email) {
   return {
     type: ActionType.LOGIN,
-    payload
+    email
   }
 }
 

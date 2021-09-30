@@ -1,12 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Header from '../../components/Header'
 
 // import { Container } from './styles';
 
 function Wallet() {
+  const { email } = useSelector(state => state.user);
+
   return (
-    <Header email="vinicius@gmail.com" totalValue={2000} />
+    <Header email={email} totalValue={0} />
   );
 }
 

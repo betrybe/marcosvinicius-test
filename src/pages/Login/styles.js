@@ -74,6 +74,12 @@ const FButon = styled.button`
   }
 `;
 
+const FErrorMessage = styled.h4`
+  font-size: 10px;
+  color: red;
+  transition: .25s linear;
+`;
+
 
 export {
   FContainer,
@@ -81,5 +87,6 @@ export {
   FBlock,
   FLogoContainer,
   FLogo,
-  FButon
+  FButon,
+  FErrorMessage
 };
