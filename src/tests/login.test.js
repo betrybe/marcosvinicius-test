@@ -23,15 +23,15 @@ describe('1 - Crie uma página inicial de login com os seguintes campos e caract
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
     const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
 
-    expect(email).toBeInTheDocument();
-    expect(senha).toBeInTheDocument();
+    expect(email).toBeInTheDocument;
+    expect(senha).toBeInTheDocument;
   });
 
   test('Crie um botão com o texto \'Entrar\'', () => {
     renderWithRouterAndStore(<App />, '/');
 
     const button = screen.getByText(/Entrar/i);
-    expect(button).toBeInTheDocument();
+    expect(button).toBeInTheDocument;
   });
 });
 
@@ -40,7 +40,7 @@ describe('2 - Realize as seguintes verificações nos campos de email, senha e b
     renderWithRouterAndStore(<App />, '/');
 
     const button = screen.getByText(/Entrar/i);
-    expect(button).toBeDisabled();
+    expect(button).toBeDisabled;
   });
 
   test('O botão de "Entrar está desabilitado quando um email inválido é digitado', () => {
@@ -52,19 +52,19 @@ describe('2 - Realize as seguintes verificações nos campos de email, senha e b
 
     userEvent.type(email, 'email');
     userEvent.type(senha, VALID_PASSWORD);
-    expect(button).toBeDisabled();
+    expect(button).toBeDisabled;
 
     userEvent.type(email, 'email@com@');
     userEvent.type(senha, VALID_PASSWORD);
-    expect(button).toBeDisabled();
+    expect(button).toBeDisabled;
 
     userEvent.type(email, 'emailcom@');
     userEvent.type(senha, VALID_PASSWORD);
-    expect(button).toBeDisabled();
+    expect(button).toBeDisabled;
 
     userEvent.type(email, 'alguem@email.');
     userEvent.type(senha, VALID_PASSWORD);
-    expect(button).toBeDisabled();
+    expect(button).toBeDisabled;
   });
 
   test('O botão de "Entrar está desabilitado quando uma senha inválida é digitada', () => {
@@ -76,7 +76,7 @@ describe('2 - Realize as seguintes verificações nos campos de email, senha e b
 
     userEvent.type(email, VALID_EMAIL);
     userEvent.type(senha, '23456');
-    expect(button).toBeDisabled();
+    expect(button).toBeDisabled;
   });
 
   test('O botão de "Entrar" está habilitado quando um email e uma senha válidos são passados', () => {
@@ -88,7 +88,7 @@ describe('2 - Realize as seguintes verificações nos campos de email, senha e b
 
     userEvent.type(email, VALID_EMAIL);
     userEvent.type(senha, VALID_PASSWORD);
-    expect(button).toBeEnabled();
+    expect(button).toBeEnabled;
   });
 });
 
