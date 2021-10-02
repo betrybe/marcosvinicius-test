@@ -14,10 +14,11 @@ function Header({ email, totalValue }) {
     <Container>
       <Logo src={TrybeLogo} />
       <Block>
-        <Label data-testid="email-field">E-mail: {email}</Label>
+      <Label>E-mail</Label>
+      <Label data-testid="email-field">{email}</Label>
         <Div>
-          <Label data-testid="total-field">Despesa Total: R$ </Label>
-          <Label data-testid="header-currency-field">{totalValue ? totalValue : 0} BRL</Label>
+          <Label data-testid="total-field">Despesa Total: R$ {totalValue ? totalValue : 0}</Label>
+          <Label data-testid="header-currency-field">BRL</Label>
         </Div>
       </Block>
     </Container>
