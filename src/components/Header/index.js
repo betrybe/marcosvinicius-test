@@ -6,7 +6,9 @@ import {
   Block,
   Label,
   Logo,
-  Div
+  Div,
+  Span
+
 } from './styles';
 
 function Header({ email, totalValue }) {
@@ -17,9 +19,9 @@ function Header({ email, totalValue }) {
       <Label>E-mail</Label>
       <Label data-testid="email-field">{email}</Label>
         <Div>
-          <span>
+          <Span>
             <Label data-testid="total-field">{totalValue}</Label>
-          </span>
+          </Span>
           <Label data-testid="header-currency-field">BRL</Label>
         </Div>
       </Block>

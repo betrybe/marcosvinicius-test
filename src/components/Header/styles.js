@@ -31,10 +31,13 @@ const Logo = styled.img`
 
 const Div = styled.div``;
 
+const Span = styled.span``;
+
 export {
   Container,
   Block,
   Label,
   Logo,
-  Div
+  Div,
+  Span
 }
