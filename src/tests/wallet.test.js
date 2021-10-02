@@ -46,7 +46,7 @@ describe('5 - Crie um header para a página de carteira contendo as seguintes ca
     const totalField = screen.getByTestId('total-field');
 
     const INITIAL_VALUE = 0;
-    expect(totalField).toContainHTML(INITIAL_VALUE);
+    expect(totalField.textContent).toBe(INITIAL_VALUE.toString());
   });
 
   test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {

@@ -8,6 +8,7 @@ import Header from '../../components/Header'
 import { Container } from './styles';
 
 function Wallet() {
+  const [total, setTotal] = useState(0)
   const [moedas, setMoedas] = useState([])
   const { email } = useSelector(state => state.user);
 
@@ -20,42 +21,43 @@ function Wallet() {
         currencies.push(code);
       }
 
-      const currenciesFiltred = currencies.filter(distinct);
+      const currenciesNotDuplicated = currencies.filter(distinct);
+      const currenciesFiltred = currenciesNotDuplicated.filter(item => item !== 'USDT')
       setMoedas(currenciesFiltred);
     })
   }, [])
 
   return (
     <>
-      <Header email={email} totalValue={0} />
+      <Header email={email} totalValue={total} />
       <Container>
-        <label htmlFor="Valor">Valor: </label>
+        <label htmlFor="Valor">valor: </label>
         <input type="number" />
 
-        <label htmlFor="Moeda">Moeda: </label>
+        <label htmlFor="Moeda">moeda: </label>
         <select name="" id="">
           { moedas.map(m => (
             <option key={m}>{m}</option>
           )) }
         </select>
 
-        <label htmlFor="Método">Método de pagamento: </label>
+        <label htmlFor="Método">método de pagamento: </label>
         <select name="" id="">
-          <option value="">Dinheiro</option>
-          <option value="">Cartão de crédito</option>
-          <option value="">Cartão de débito</option>
+          <option value="">dinheiro</option>
+          <option value="">cartão de crédito</option>
+          <option value="">cartão de débito</option>
         </select>
 
-        <label htmlFor="Tag">Tag: </label>
+        <label htmlFor="Tag">tag: </label>
         <select name="" id="">
-          <option value="">Alimentação</option>
-          <option value="">Lazer</option>
-          <option value="">Trabalho</option>
-          <option value="">Transporte</option>
-          <option value="">Saúde</option>
+          <option value="">alimentação</option>
+          <option value="">lazer</option>
+          <option value="">trabalho</option>
+          <option value="">transporte</option>
+          <option value="">saúde</option>
         </select>
 
-        <label htmlFor="Descrição">Descrição: </label>
+        <label htmlFor="Descrição">descrição: </label>
         <input type="text" />
 
         <button type="button" onClick={() => {}}>

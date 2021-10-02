@@ -17,7 +17,9 @@ function Header({ email, totalValue }) {
       <Label>E-mail</Label>
       <Label data-testid="email-field">{email}</Label>
         <Div>
-          <Label data-testid="total-field">Despesa Total: R$ {totalValue ? totalValue : 0}</Label>
+          <span>
+            <Label data-testid="total-field">{totalValue}</Label>
+          </span>
           <Label data-testid="header-currency-field">BRL</Label>
         </Div>
       </Block>
