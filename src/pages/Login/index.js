@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 function Login() {
-  const patternEmail = /^[\w-]+@([\w-]+)+[\w-]{2,4}$/;
+  const patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const patternSenha = /^.{5,}$/;
 
   const [email, setEmail] = useState('');
