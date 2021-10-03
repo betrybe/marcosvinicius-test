@@ -33,7 +33,7 @@ const Container = styled.form`
       transition: .25s;
 
       &:focus {
-        box-shadow: 2px 2px 5px #3FB589;
+        box-shadow: 2px 2px 5px #F0E68C;
       }
     }
 
@@ -53,7 +53,7 @@ const Container = styled.form`
     box-shadow: 1px 2px 15px rgba(0,0,0.1);
 
     &:focus {
-      box-shadow: 2px 2px 5px #3FB589;
+      box-shadow: 2px 2px 5px #F0E68C;
     }
   }
 

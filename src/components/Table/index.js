@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import { FaTrash } from 'react-icons';
+// import { FiEdit } from 'react-icons/fi';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemToWallet } from '../../actions/wallet';
+import { removeItemToWallet, updateItemToWallet } from '../../actions/wallet';
 
 import { Container, Thead, Tbody } from './styles';
 
@@ -29,6 +29,12 @@ const Table = () => {
   const handleDelete = useCallback((id) => {
     dispatch(
       removeItemToWallet(id)
+    )
+  }, [expenses])
+
+  const handleUpdate = useCallback((id, data) => {
+    dispatch(
+      updateItemToWallet(id, data)
     )
   }, [expenses])
 
@@ -65,9 +71,9 @@ const Table = () => {
                     {/* <FaTrash size={22} /> */}
                     Deletar
                   </button>
-                  <button disabled type="button" data-testid="edit-btn">
-                    {/* <FaEdit size={22} /> */}
-                    Editar
+                  <button type="button" data-testid="edit-btn" onClick={ () => handleUpdate(expense.id, expense) }>
+                    {/* <FiEdit /> */}
+                      Editar
                   </button>
                 </div>
               </td>

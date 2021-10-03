@@ -49,7 +49,7 @@ const Tbody = styled.tbody`
     border: none;
     box-shadow: 0px 2px 10px rgba(0,0,0.2);
     transition: .25s;
-    margin: 0 8px;
+    margin: 0px 8px;
   }
 
   button:nth-child(1) {
@@ -62,8 +62,12 @@ const Tbody = styled.tbody`
   }
 
   button:nth-child(2) {
-    background: gray;
-    cursor: not-allowed;
+    background: linear-gradient(120deg,#F0E68C,#252525,#F0E68C);
+    background-size:200%;
+    &:hover {
+      cursor: pointer;
+      background-position:right;
+    }
   }
 `;
 
