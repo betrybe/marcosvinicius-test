@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import {  } from 'react-icons';
+// import { FaTrash } from 'react-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItemToWallet } from '../../actions/wallet';
 
@@ -63,11 +63,11 @@ const Table = () => {
                 <div>
                   <button type="button" data-testid="delete-btn" onClick={ () => handleDelete(expense.id) }>
                     {/* <FaTrash size={22} /> */}
-                    deletar
+                    Deletar
                   </button>
-                  <button type="button" data-testid="edit-btn">
+                  <button disabled type="button" data-testid="edit-btn">
                     {/* <FaEdit size={22} /> */}
-                    editar
+                    Editar
                   </button>
                 </div>
               </td>
