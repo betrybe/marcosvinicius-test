@@ -9,14 +9,14 @@ const Table = () => {
   const [currencies, setCurrencies] = useState([]);
 
   const dispatch = useDispatch();
-  const { expenses: despesas } = useSelector(state => state.wallet);
+  const { expenses } = useSelector(state => state.wallet);
 
   useEffect(() => {
-    for (const despesa of despesas) {
-      for (const [_, value] of Object.entries(despesa.exchangeRates)) {
-        if (despesa.currency === value.code) {
+    for (const expense of expenses) {
+      for (const [_, value] of Object.entries(expense.exchangeRates)) {
+        if (expense.currency === value.code) {
           setCurrencies([...currencies, {
-            key: despesa.currency,
+            key: expense.currency,
             name: value.name,
             info: value,
           }])
@@ -24,13 +24,13 @@ const Table = () => {
         }
       }
     }
-  }, [despesas]);
+  }, [expenses]);
 
   const handleDelete = useCallback((id) => {
     dispatch(
       removeItemToWallet(id)
     )
-  }, [])
+  }, [expenses])
 
   return (
     <Container>
@@ -49,19 +49,19 @@ const Table = () => {
       </Thead>
       <Tbody>
         {
-          despesas.map(despesa => (
-            <tr key={despesa.id}>
-              <td>{despesa.description}</td>
-              <td>{despesa.tag}</td>
-              <td>{despesa.method}</td>
-              <td>{despesa.currency} {Number(despesa.value).toFixed(2)}</td>
-              <td>{currencies.find(item => despesa.currency === item.key)?.name}</td>
-              <td>R$ {(Number(currencies.find(item => despesa.currency === item.key)?.info.ask)).toFixed(2)}</td>
-              <td>R$ {(Number(currencies.find(item => despesa.currency === item.key)?.info.ask * despesa.value)).toFixed(2)}</td>
+          expenses.map((expense) => (
+            <tr key={expense.id}>
+              <td>{expense.description}</td>
+              <td>{expense.tag}</td>
+              <td>{expense.method}</td>
+              <td>{expense.currency} {Number(expense.value).toFixed(2)}</td>
+              <td>{currencies.find(item => expense.currency === item.key)?.name}</td>
+              <td>R$ {(Number(currencies.find(item => expense.currency === item.key)?.info.ask))?.toFixed(2)}</td>
+              <td>R$ {(Number(currencies.find(item => expense.currency === item.key)?.info.ask * expense.value))?.toFixed(2)}</td>
               <td>Real Brasileiro</td>
               <td>
                 <div>
-                  <button type="button" data-testid="delete-btn" onClick={ () => handleDelete(despesa.id) }>
+                  <button type="button" data-testid="delete-btn" onClick={ () => handleDelete(expense.id) }>
                     {/* <FaTrash size={22} /> */}
                     deletar
                   </button>

@@ -31,7 +31,6 @@ function Wallet() {
   const handleAddItem = useCallback(async () => {
     const { data } = await api.get('/')
     const payload = {
-      id: expenses.length === 0 ? 0 : expenses.length + 1,
       value: valor,
       description: descricao,
       currency: moeda,
@@ -60,52 +59,71 @@ function Wallet() {
     })
   }, [])
 
+  useEffect(() => {
+    const total = expenses.reduce((previousValue, currentValue, index, array) => {
+      const { value } = currentValue
+      return Number(value) + previousValue
+    }, 0)
+    setTotal(total);
+  }, [expenses])
+
   return (
     <>
       <Header email={email} totalValue={total} />
       <Container>
-        <label htmlFor="Valor">valor: </label>
-        <input
-          type="number"
-          onChange={e => setValor(e.target.value)}
-          value={valor}
-        />
+        <div className="block">
+          <label htmlFor="Valor">valor: </label>
+          <input
+            className="valor"
+            type="number"
+            onChange={e => setValor(e.target.value)}
+            value={valor}
+          />
+        </div>
 
-        <label htmlFor="Moeda">moeda: </label>
-        <select onChange={e => setMoeda(e.target.value)}>
-          { moedas.map(m => (
-            <option value={m} key={m}>{m}</option>
-          )) }
-        </select>
+        <div className="block">
+          <label htmlFor="Moeda">moeda: </label>
+          <select onChange={e => setMoeda(e.target.value)}>
+            { moedas.map(m => (
+              <option value={m} key={m}>{m}</option>
+            )) }
+          </select>
+        </div>
 
-        <label htmlFor="Método">método de pagamento: </label>
-        <select onChange={e => setMetodoPagamento(e.target.value)}>
-          <option value="Dinheiro">dinheiro</option>
-          <option value="Cartão de crédito">cartão de crédito</option>
-          <option value="Cartão de débito">cartão de débito</option>
-        </select>
+        <div className="block">
+          <label htmlFor="Método">método de pagamento: </label>
+          <select onChange={e => setMetodoPagamento(e.target.value)}>
+            <option value="Dinheiro">dinheiro</option>
+            <option value="Cartão de crédito">cartão de crédito</option>
+            <option value="Cartão de débito">cartão de débito</option>
+          </select>
+        </div>
 
-        <label htmlFor="Tag">tag: </label>
-        <select name="" id="" onChange={e => setTag(e.target.value)}>
-          <option value="Alimentação">alimentação</option>
-          <option value="Lazer">lazer</option>
-          <option value="Trabalho">trabalho</option>
-          <option value="Transporte">transporte</option>
-          <option value="Saúde">saúde</option>
-        </select>
+        <div className="block">
+          <label htmlFor="Tag">tag: </label>
+          <select name="" id="" onChange={e => setTag(e.target.value)}>
+            <option value="Alimentação">alimentação</option>
+            <option value="Lazer">lazer</option>
+            <option value="Trabalho">trabalho</option>
+            <option value="Transporte">transporte</option>
+            <option value="Saúde">saúde</option>
+          </select>
+        </div>
 
-        <label htmlFor="Descrição">descrição: </label>
-        <input
-          type="text"
-          value={descricao}
-          onChange={e => setDescricao(e.target.value)}
-        />
+        <div className="block">
+          <label htmlFor="Descrição">descrição: </label>
+          <input
+            className="descricao"
+            type="text"
+            value={descricao}
+            onChange={e => setDescricao(e.target.value)}
+          />
+        </div>
 
         <button type="button" onClick={ handleAddItem }>
           Adicionar despesa
         </button>
       </Container>
-
       <Table />
     </>
   );

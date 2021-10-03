@@ -20,7 +20,8 @@ function Header({ email, totalValue }) {
       <Label data-testid="email-field">{email}</Label>
         <Div>
           <Span>
-            <Label data-testid="total-field">{totalValue}</Label>
+          <Label>Despesa Total: R$: </Label>
+            <Label data-testid="total-field">{Number(totalValue).toFixed(2)}</Label>
           </Span>
           <Label data-testid="header-currency-field">BRL</Label>
         </Div>
