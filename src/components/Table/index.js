@@ -1,32 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemToWallet, requestUpdateItemToWallet } from '../../actions/wallet';
+import { removeItemToWallet, requestUpdateItemToWallet, pushCurrenciesToWallet } from '../../actions/wallet';
 
 import { Container, Thead, Tbody } from './styles';
 
 const Table = () => {
-  const [currencies, setCurrencies] = useState([]);
-
+  const { expenses, currencies } = useSelector(state => state.wallet);
   const dispatch = useDispatch();
-  const { expenses } = useSelector(state => state.wallet);
 
-
-  // TODO REVER ISSO URGENTE
   useEffect(() => {
-    for (const expense of expenses) {
-      for (const result of Object.entries(expense.exchangeRates)) {
-        const value = result['1'];
-        if (expense.currency === value.code) {
-          setCurrencies([...currencies, {
-            key: expense.currency,
-            name: value.name,
-            info: value,
-          }])
-          break
-        }
-      }
-    }
-  }, []);
+    dispatch(
+      pushCurrenciesToWallet()
+    );
+  }, [dispatch, expenses]);
 
   const handleDelete = useCallback((id) => {
     dispatch(
@@ -63,9 +49,9 @@ const Table = () => {
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
               <td>{expense.currency} {Number(expense.value).toFixed(2)}</td>
-              <td>{currencies.find(item => expense.currency === item.key)?.name}</td>
-              <td>R$ {(Number(currencies.find(item => expense.currency === item.key)?.info.ask))?.toFixed(2)}</td>
-              <td>R$ {(Number(currencies.find(item => expense.currency === item.key)?.info.ask * expense.value))?.toFixed(2)}</td>
+              <td>{currencies.find(currency => expense.currency === currency.code)?.currencyName}</td>
+              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.info.ask))?.toFixed(2)}</td>
+              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.info.ask * expense.value))?.toFixed(2)}</td>
               <td>Real Brasileiro</td>
               <td>
                 <div>

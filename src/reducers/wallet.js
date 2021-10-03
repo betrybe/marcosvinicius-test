@@ -70,6 +70,26 @@ function wallet(state = INITIAL_STATE, action) {
         expenseId: id
       }
     }
+    case ActionType.PUSH_CURRENCIES_TO_WALLET: {
+      const currencies = [];
+      for (const expense of state.expenses) {
+        for (const result of Object.entries(expense.exchangeRates)) {
+          const value = result['1'];
+          if (expense.currency === value.code) {
+            currencies.push({
+              code: expense.currency,
+              currencyName: value.name,
+              info: value,
+            })
+            break
+          }
+        }
+      }
+      return {
+        ...state,
+        currencies,
+      }
+    }
     default: {
       return {
         ...state

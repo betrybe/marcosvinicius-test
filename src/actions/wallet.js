@@ -3,6 +3,7 @@ export const ActionType = {
   REMOVE_ITEM_TO_WALLET: '@REMOVE_ITEM_TO_WALLET',
   UPDATE_ITEM_TO_WALLET: '@UPDATE_ITEM_TO_WALLET',
   REQUEST_UPDATE_ITEM_TO_WALLET: '@REQUEST_UPDATE_ITEM_TO_WALLET',
+  PUSH_CURRENCIES_TO_WALLET: '@PUSH_CURRENCIES_TO_WALLET',
 }
 
 export function addItemToWallet(data) {
@@ -39,5 +40,11 @@ export function updateItemToWallet(id, data) {
       id,
       data
     }
+  }
+}
+
+export function pushCurrenciesToWallet() {
+  return {
+    type: ActionType.PUSH_CURRENCIES_TO_WALLET
   }
 }
