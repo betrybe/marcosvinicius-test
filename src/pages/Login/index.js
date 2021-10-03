@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../actions/user';
@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 function Login() {
-  const patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const patternEmail = /^[\w-]+@([\w-]+)+[\w-]{2,4}$/;
   const patternSenha = /^.{5,}$/;
 
   const [email, setEmail] = useState('');
@@ -27,30 +27,30 @@ function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const submit = () => {
+  const submit = useCallback(() => {
     if (formValido) {
       dispatch(userLogin(email));
       history.push('/carteira');
     }
-  }
+  }, [dispatch, email, formValido, history]);
 
-  const handleChangePassword = (e) => {
+  const handleChangePassword = useCallback((e) => {
     setSenha(e.target.value);
     if (senha.length >= 6 || patternSenha.test(senha)) {
       setSenhaInvalida(false);
     } else {
       setSenhaInvalida(true);
     }
-  }
+  }, [senha, patternSenha]);
 
-  const handleChangeEmail = (e) => {
+  const handleChangeEmail = useCallback((e) => {
     setEmail(e.target.value);
     if (patternEmail.test(email)) {
       setEmailInvalido(false);
     } else {
       setEmailInvalido(true);
     }
-  }
+  }, [email, patternEmail]);
 
   useEffect(() => {
     if (email !== '' && senha !== '') {
@@ -61,7 +61,7 @@ function Login() {
       }
     }
 
-  }, [email, senha])
+  }, [email, senha, emailInvalido, senhaInvalida]);
 
   return (
     <FContainer>

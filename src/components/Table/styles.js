@@ -1,30 +1,31 @@
 import styled from 'styled-components';
 
 const Container = styled.table`
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  aling-items: center;
+  width: 100%;
   color: #fff;
 `;
 
 const Thead = styled.thead`
+  display: inherit;
+  width: 100%;
   background: #333;
   color: #fff;
 
   tr {
-    font-size: 14px;
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
     font-family:'Roboto Condensed', sans-serif;
-    text-aling: center;
-    display: flex;
-    padding: 10px 15px;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 14px;
     width: 100%;
-    justify-content: space-around;
   }
 `;
 
 const Tbody = styled.tbody`
+  margin-top: 2rem;
   background: #fff;
   color: #000;
 

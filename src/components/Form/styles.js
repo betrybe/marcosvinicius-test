@@ -5,7 +5,7 @@ const Container = styled.form`
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
-  background: #2E2E2E;
+  background: ${props => props.isUpdate ? '#3FB589' : '#2E2E2E'};
   padding: 25px 15px;
   color: #fff;
 
@@ -29,11 +29,11 @@ const Container = styled.form`
       border-radius: 5px;
       outline: none;
       border: none;
-      box-shadow: 1px 2px 25px rgba(0,0,0.1);
+      box-shadow: 1px 2px 5px rgb(0 0 0);
       transition: .25s;
 
       &:focus {
-        box-shadow: 2px 2px 5px #F0E68C;
+        box-shadow: 1px 2px 5px #F0E68C;
       }
     }
 
@@ -50,15 +50,15 @@ const Container = styled.form`
     border-radius: 5px;
     outline: none;
     border: none;
-    box-shadow: 1px 2px 15px rgba(0,0,0.1);
+    box-shadow: 1px 2px 5px rgb(0 0 0);
 
     &:focus {
-      box-shadow: 2px 2px 5px #F0E68C;
+      box-shadow: 1px 2px 5px #F0E68C;
     }
   }
 
   button {
-    background: linear-gradient(120deg, #3FB589, #252525, #3FB589);
+    background: ${props => props.isUpdate ? '#252525' : 'linear-gradient(120deg, #3FB589, #252525, #3FB589)'} ;
     background-size:200%;
     padding: 12px 10px;
     color: #fff;
