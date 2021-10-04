@@ -50,12 +50,12 @@ export function pushCurrenciesToWallet() {
   }
 }
 
-export function calculeTotalValue(data = null, id = null) {
+export function calculeTotalValue(id, data) {
   return {
     type: ActionType.CALCULE_TOTAL_VALUE,
     payload: {
-      data,
-      id
+      id,
+      data
     }
   }
 }

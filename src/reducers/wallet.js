@@ -108,8 +108,7 @@ function wallet(state = INITIAL_STATE, action) {
       }
       if (action.payload.data && state.expenses.length !== 0) {
         const totalValue = state.expenses.reduce((previousValue, currentValue) => {
-          const { value } = currentValue;
-          return Number(value) + previousValue
+          return Number(currentValue?.value) + previousValue
         }, 0);
 
         return {
@@ -119,16 +118,13 @@ function wallet(state = INITIAL_STATE, action) {
       }
 
       if (action.payload.id && !action.payload.data) {
-        const index = state.expenses.findIndex(expense => expense.id === action.payload.id);
         const totalValue = state.expenses.reduce((previousValue, currentValue) => {
-          const { value } = currentValue;
+          const { value } = currentValue
           return Number(value) + previousValue
         }, 0);
-        const totalUpdateValue =  totalValue - state.expenses[index].value;
-
         return {
           ...state,
-          totalValue: totalUpdateValue
+          totalValue
         }
       }
     }

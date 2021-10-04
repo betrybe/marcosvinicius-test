@@ -19,7 +19,7 @@ const Table = () => {
       removeItemToWallet(id)
     );
     dispatch(
-      calculeTotalValue(id)
+      calculeTotalValue(id, null)
     )
   }, [dispatch]);
 
