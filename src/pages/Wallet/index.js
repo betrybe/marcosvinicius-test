@@ -33,12 +33,12 @@ function Wallet() {
       <Header email={email} totalValue={totalValue} />
       <Form
         codes={codes}
-        tags={[
+        methods={[
           "Dinheiro",
           "Cartão de crédito",
           "Cartão de débito",
         ]}
-        methods={[
+        tags={[
           "alimentação",
           "lazer",
           "trabalho",

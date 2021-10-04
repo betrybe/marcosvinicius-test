@@ -38,7 +38,7 @@ describe('5 - Crie um header para a página de carteira contendo as seguintes ca
     const emailField = screen.getByTestId('email-field');
 
     expect(emailField.innerHTML).not.toBe('');
-    expect(emailField.textContent).toBe(store.getState().user.email);
+    expect(emailField).toContainHTML(store.getState().user.email);
   });
 
   test('Crie um campo com a despesa total gerada pela lista de gastos.', () => {
@@ -46,15 +46,15 @@ describe('5 - Crie um header para a página de carteira contendo as seguintes ca
     const totalField = screen.getByTestId('total-field');
 
     const INITIAL_VALUE = 0;
-    expect(totalField.textContent).toBe(INITIAL_VALUE.toString());
+    expect(totalField).toContainHTML(INITIAL_VALUE);
   });
 
   test('Crie um campo que mostre que qual câmbio está sendo utilizado, que será neste caso \'BRL\'', () => {
     renderWithRouterAndStore(<Wallet />, '/carteira');
     const exchangeField = screen.getByTestId('header-currency-field');
 
-    expect(exchangeField).toBeInTheDocument;
-    expect(exchangeField.textContent).toBe('BRL');
+    expect(exchangeField).toBeInTheDocument();
+    expect(exchangeField).toContainHTML('BRL');
   });
 });
 
