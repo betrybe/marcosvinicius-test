@@ -62,7 +62,7 @@ const Table = () => {
                     Deletar
                   </button>
                   <button type="button" data-testid="edit-btn" onClick={ () => handleRequestUpdate(expense.id) }>
-                      Editar
+                    Editar
                   </button>
                 </div>
               </td>

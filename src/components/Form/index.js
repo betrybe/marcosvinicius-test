@@ -64,6 +64,7 @@ function Form({ codes, tags, methods }) {
         <div className="block">
           <label htmlFor="Valor">valor: </label>
           <input
+            data-testid="value-input"
             className="valor"
             type="number"
             onChange={e => setValor(e.target.value)}
@@ -73,7 +74,7 @@ function Form({ codes, tags, methods }) {
 
         <div className="block">
           <label htmlFor="code">code: </label>
-          <select onChange={e => setCode(e.target.value)}>
+          <select data-testid="currency-input" onChange={e => setCode(e.target.value)}>
             { codes.map(code => (
               <option value={code} key={code}>{code}</option>
             )) }
@@ -82,7 +83,7 @@ function Form({ codes, tags, methods }) {
 
         <div className="block">
           <label htmlFor="Método">método de pagamento: </label>
-          <select onChange={e => setMetodoPagamento(e.target.value)}>
+          <select data-testid="method-input" onChange={e => setMetodoPagamento(e.target.value)}>
           {methods.map(method => (
             <option key={method} value={method}>{method}</option>
           ))
@@ -92,7 +93,7 @@ function Form({ codes, tags, methods }) {
 
         <div className="block">
           <label htmlFor="Tag">tag: </label>
-          <select onChange={e => setTag(e.target.value)}>
+          <select data-testid="tag-input" onChange={e => setTag(e.target.value)}>
             {tags.map(tag => (
                <option key={tag} value={tag}>{tag}</option>
             ))}
@@ -105,6 +106,7 @@ function Form({ codes, tags, methods }) {
             className="descricao"
             type="text"
             value={descricao}
+            data-testid="description-input"
             onChange={e => setDescricao(e.target.value)}
           />
         </div>
