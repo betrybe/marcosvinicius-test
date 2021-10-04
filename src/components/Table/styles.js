@@ -30,12 +30,16 @@ const Tbody = styled.tbody`
   color: #000;
 
   tr {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    place-items: center;
     padding: 10px 15px;
     width: 100%;
-    justify-content: space-around;
 
     td {
+      display: flex;
+      justify-content: center;
+      word-break: break-word;
       font-size: 14px;
       font-family:'Roboto Condensed', sans-serif;
     }
