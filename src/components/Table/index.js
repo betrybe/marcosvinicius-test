@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemToWallet, requestUpdateItemToWallet, pushCurrenciesToWallet } from '../../actions/wallet';
+import { removeItemToWallet, requestUpdateItemToWallet, pushCurrenciesToWallet, calculeTotalValue } from '../../actions/wallet';
 
 import { Container, Thead, Tbody } from './styles';
 
@@ -17,6 +17,9 @@ const Table = () => {
   const handleDelete = useCallback((id) => {
     dispatch(
       removeItemToWallet(id)
+    );
+    dispatch(
+      calculeTotalValue(id)
     )
   }, [dispatch]);
 

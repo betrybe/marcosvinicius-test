@@ -10,10 +10,9 @@ import Form from '../../components/Form'
 
 function Wallet() {
   const [codes, setCodes] = useState([])
-  const [total, setTotal] = useState(0);
 
   const { email } = useSelector(state => state.user);
-  const { expenses } = useSelector(state => state.wallet);
+  const { totalValue } = useSelector(state => state.wallet);
 
   useEffect(() => {
     api.get('/').then(currency => {
@@ -29,17 +28,9 @@ function Wallet() {
     })
   }, [])
 
-  useEffect(() => {
-    const total = expenses.reduce((previousValue, currentValue, index, array) => {
-      const { value } = currentValue
-      return Number(value) + previousValue
-    }, 0)
-    setTotal(total);
-  }, [expenses])
-
   return (
     <>
-      <Header email={email} totalValue={total} />
+      <Header email={email} totalValue={totalValue} />
       <Form
         codes={codes}
         tags={[

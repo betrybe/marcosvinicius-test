@@ -4,6 +4,7 @@ export const ActionType = {
   UPDATE_ITEM_TO_WALLET: '@UPDATE_ITEM_TO_WALLET',
   REQUEST_UPDATE_ITEM_TO_WALLET: '@REQUEST_UPDATE_ITEM_TO_WALLET',
   PUSH_CURRENCIES_TO_WALLET: '@PUSH_CURRENCIES_TO_WALLET',
+  CALCULE_TOTAL_VALUE: '@CALCULE_TOTAL_VALUE'
 }
 
 export function addItemToWallet(data) {
@@ -46,5 +47,15 @@ export function updateItemToWallet(id, data) {
 export function pushCurrenciesToWallet() {
   return {
     type: ActionType.PUSH_CURRENCIES_TO_WALLET
+  }
+}
+
+export function calculeTotalValue(data = null, id = null) {
+  return {
+    type: ActionType.CALCULE_TOTAL_VALUE,
+    payload: {
+      data,
+      id
+    }
   }
 }

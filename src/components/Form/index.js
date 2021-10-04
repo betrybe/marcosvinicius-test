@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addItemToWallet, updateItemToWallet } from '../../actions/wallet';
+import { addItemToWallet, updateItemToWallet, calculeTotalValue } from '../../actions/wallet';
 import api from '../../services/api';
 
 import { Container } from './styles';
@@ -32,8 +32,9 @@ function Form({ codes, tags, methods }) {
       exchangeRates: data
     }
     dispatch(
-      addItemToWallet(payload)
+      addItemToWallet(payload),
     );
+    dispatch(calculeTotalValue(payload.value))
     clearFields()
   }, [valor, code, descricao, tag, metodoPagamento, dispatch, clearFields])
 
@@ -48,8 +49,14 @@ function Form({ codes, tags, methods }) {
       exchangeRates: expense?.exchangeRates
     }
     expense && (
-      dispatch(updateItemToWallet(id, payload))
+      dispatch(
+        updateItemToWallet(id, payload)
+      )
     );
+
+    expense && (
+      dispatch(calculeTotalValue(payload.value))
+    )
   }, [dispatch, expenses, valor, code, descricao, tag, metodoPagamento])
 
   return (
@@ -80,9 +87,6 @@ function Form({ codes, tags, methods }) {
             <option key={method} value={method}>{method}</option>
           ))
           }
-            {/* <option value="Dinheiro">dinheiro</option>
-            <option value="Cartão de crédito">cartão de crédito</option>
-            <option value="Cartão de débito">cartão de débito</option> */}
           </select>
         </div>
 
@@ -113,23 +117,9 @@ function Form({ codes, tags, methods }) {
             :
               () => handleAddItem()
           }>
-            {isUpdated ? 'Editar Gasto' : 'Adicionar despesa'}
+            {isUpdated ? 'Editar despesa' : 'Adicionar despesa'}
           </button>
         </div>
-
-        {/* {isUpdated ? (
-          <div className="block">
-            <button type="button" onClick={ () => handleUpdate(expenseId) }>
-            Editar Gasto
-          </button>
-          </div>
-        ) : (
-          <div className="block">
-            <button type="button" onClick={ () => handleAddItem() }>
-              Adicionar despesa
-            </button>
-          </div>
-        )} */}
       </Container>
   );
 }

@@ -58,7 +58,7 @@ const Container = styled.form`
   }
 
   button {
-    background: ${props => props.isUpdate ? '#252525' : 'linear-gradient(120deg, #3FB589, #252525, #3FB589)'} ;
+    background: ${props => props.isUpdate ? 'linear-gradient(120deg, #000, #252525, #252525)' : 'linear-gradient(120deg, #3FB589, #252525, #3FB589)'} ;
     background-size:200%;
     padding: 12px 10px;
     color: #fff;

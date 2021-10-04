@@ -3,6 +3,7 @@ import { ActionType } from '../actions/wallet';
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  totalValue: 0,
   isUpdated: false,
   expenseId: null
 };
@@ -15,6 +16,7 @@ function wallet(state = INITIAL_STATE, action) {
         id: state.expenses.length ? Number(state.expenses.slice(-1)[0].id) + 1 : 0,
         ...data
       }
+
       return {
         ...state,
         currencies: [...state.currencies],
@@ -27,14 +29,21 @@ function wallet(state = INITIAL_STATE, action) {
     }
     case ActionType.REMOVE_ITEM_TO_WALLET: {
       const { id } = action.payload;
-      const findIndexExpense = state.expenses.findIndex(expense => expense.id === id)
+      const findIndexExpense = state.expenses.findIndex(expense => expense.id === id);
       if (findIndexExpense < 0) {
         return {
           ...state,
           isUpdated: false,
         }
       } else {
-        state.expenses.splice(findIndexExpense, 1)
+        state.expenses.splice(findIndexExpense, 1);
+        if (state.expenses.length === 0) {
+          return {
+            ...state,
+            totalValue: 0,
+            isUpdated: false,
+          }
+        }
         return {
           ...state,
           isUpdated: false,
@@ -88,6 +97,39 @@ function wallet(state = INITIAL_STATE, action) {
       return {
         ...state,
         currencies,
+      }
+    }
+    case ActionType.CALCULE_TOTAL_VALUE: {
+      if (action.payload.data && state.expenses.length === 0) {
+        return {
+          ...state,
+          totalValue: action.payload.data.value
+        }
+      }
+      if (action.payload.data && state.expenses.length !== 0) {
+        const totalValue = state.expenses.reduce((previousValue, currentValue) => {
+          const { value } = currentValue;
+          return Number(value) + previousValue
+        }, 0);
+
+        return {
+          ...state,
+          totalValue
+        }
+      }
+
+      if (action.payload.id && !action.payload.data) {
+        const index = state.expenses.findIndex(expense => expense.id === action.payload.id);
+        const totalValue = state.expenses.reduce((previousValue, currentValue) => {
+          const { value } = currentValue;
+          return Number(value) + previousValue
+        }, 0);
+        const totalUpdateValue =  totalValue - state.expenses[index].value;
+
+        return {
+          ...state,
+          totalValue: totalUpdateValue
+        }
       }
     }
     default: {
