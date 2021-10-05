@@ -15,8 +15,9 @@ import {
 } from './styles';
 
 function Login() {
-  const patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const patternEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
   const patternSenha = /^.{5,}$/;
+
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -36,7 +37,7 @@ function Login() {
 
   const handleChangePassword = useCallback((e) => {
     setSenha(e.target.value);
-    if (senha.length >= 6 || patternSenha.test(senha)) {
+    if (patternSenha.test(senha)) {
       setSenhaInvalida(false);
     } else {
       setSenhaInvalida(true);

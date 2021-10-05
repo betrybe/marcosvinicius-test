@@ -90,7 +90,7 @@ function wallet(state = INITIAL_STATE, action) {
       if (action.payload.data && state.expenses.length !== 0) {
         const totalValue = state.expenses.reduce((previousValue, currentValue) => {
           const exchangeValue = state.currencies.find(c => c.code === action.payload.data.currency);
-          const convertedValue = Number(currentValue.value) * exchangeValue.ask;
+          const convertedValue = Number(currentValue.value) * exchangeValue?.ask;
           return convertedValue + previousValue;
         }, 0);
 
@@ -110,6 +110,10 @@ function wallet(state = INITIAL_STATE, action) {
         return {
           ...state,
           totalValue: Number(totalValue).toFixed(2)
+        }
+      } else {
+        return {
+          ...state
         }
       }
     }

@@ -7,7 +7,7 @@ import api from '../../services/api';
 import { Container } from './styles';
 
 function Form({ codes, tags, methods }) {
-  const [valor, setValor] = useState(0);
+  const [valor, setValor] = useState('');
   const [code, setCode] = useState('USD');
   const [descricao, setDescricao] = useState('');
   const [tag, setTag] = useState('Alimentação');
@@ -67,14 +67,15 @@ function Form({ codes, tags, methods }) {
             data-testid="value-input"
             className="valor"
             type="number"
-            onChange={e => setValor(e.target.value)}
             value={valor}
+            onChange={e => setValor(e.target.value)}
           />
         </div>
 
         <div className="block">
           <label htmlFor="code">code: </label>
           <select data-testid="currency-input" onChange={e => setCode(e.target.value)}>
+            <option hidden value="CAD"></option>
             { codes.map(code => (
               <option value={code} key={code}>{code}</option>
             )) }
@@ -112,7 +113,7 @@ function Form({ codes, tags, methods }) {
         </div>
 
         <div className="block">
-          <button type="button" isUpdate={isUpdated} onClick={
+          <button type="button" onClick={
             isUpdated
             ?
               () => handleUpdate(expenseId)

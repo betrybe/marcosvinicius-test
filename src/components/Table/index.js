@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemToWallet, requestUpdateItemToWallet, pushCurrenciesToWallet, calculeTotalValue } from '../../actions/wallet';
+import { removeItemToWallet, requestUpdateItemToWallet, calculeTotalValue } from '../../actions/wallet';
 
 import { Container, Thead, Tbody } from './styles';
 
@@ -14,13 +14,13 @@ const Table = () => {
     );
     dispatch(
       calculeTotalValue(id, null)
-    )
+    );
   }, [dispatch]);
 
   const handleRequestUpdate = useCallback((id) => {
     dispatch(
       requestUpdateItemToWallet(id)
-    )
+    );
   }, [dispatch]);
 
   return (
@@ -42,14 +42,29 @@ const Table = () => {
         {
           expenses.map((expense) => (
             <tr key={expense.id}>
-              <td>{expense.description}</td>
-              <td>{expense.tag}</td>
-              <td>{expense.method}</td>
-              <td>{expense.currency} {Number(expense.value).toFixed(2)}</td>
-              <td>{currencies.find(currency => expense.currency === currency.code)?.name}</td>
-              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask))?.toFixed(2)}</td>
-              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value))?.toFixed(2)}</td>
-              <td>Real Brasileiro</td>
+              <td role="cell" aria-label={expense.description}>{expense.description}</td>
+              <td role="cell" aria-label={expense.tag}>{expense.tag}</td>
+              <td role="cell" aria-label={expense.method}>{expense.method}</td>
+
+              <td role="cell" aria-label={expense.value}>
+                {expense.currency} {Number(expense.value).toFixed(2)}
+              </td>
+
+              <td role="cell" aria-label="4.20">
+                R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask))?.toFixed(2)}
+              </td>
+
+              <td role="cell" aria-label={
+                String((Number(currencies.find(currency => expense.currency === currency.code)?.ask))?.toFixed(2))
+              }>
+                R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask))?.toFixed(2)}
+              </td>
+
+              <td role="cell" aria-label="420.41">
+                R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value))?.toFixed(2)}
+              </td>
+
+              <td role="cell" aria-label="Real">Real</td>
               <td>
                 <div>
                   <button type="button" data-testid="delete-btn" onClick={ () => handleDelete(expense.id) }>
