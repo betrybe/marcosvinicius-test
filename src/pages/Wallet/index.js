@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { pushCurrenciesToWallet } from '../../actions/wallet'
 
 import api from '../../services/api';
 import { distinct } from '../../utils/distinct';
@@ -11,6 +12,7 @@ import Form from '../../components/Form'
 function Wallet() {
   const [codes, setCodes] = useState([])
 
+  const dispatch = useDispatch();
   const { email } = useSelector(state => state.user);
   const { totalValue } = useSelector(state => state.wallet);
 
@@ -23,10 +25,12 @@ function Wallet() {
         currencies.push(code);
       }
       const currenciesNotDuplicated = currencies.filter(distinct);
-      const currenciesFiltred = currenciesNotDuplicated.filter(item => item !== 'USDT')
+      const currenciesFiltred = currenciesNotDuplicated.filter(item => item !== 'USDT');
+
       setCodes(currenciesFiltred);
+      dispatch(pushCurrenciesToWallet(Object.values(result)));
     })
-  }, [])
+  }, [dispatch])
 
   return (
     <>

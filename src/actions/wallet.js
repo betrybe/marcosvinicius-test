@@ -44,9 +44,12 @@ export function updateItemToWallet(id, data) {
   }
 }
 
-export function pushCurrenciesToWallet() {
+export function pushCurrenciesToWallet(data) {
   return {
-    type: ActionType.PUSH_CURRENCIES_TO_WALLET
+    type: ActionType.PUSH_CURRENCIES_TO_WALLET,
+    payload: {
+      data
+    }
   }
 }
 

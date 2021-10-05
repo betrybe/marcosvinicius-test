@@ -8,12 +8,6 @@ const Table = () => {
   const { expenses, currencies } = useSelector(state => state.wallet);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      pushCurrenciesToWallet()
-    );
-  }, [dispatch, expenses]);
-
   const handleDelete = useCallback((id) => {
     dispatch(
       removeItemToWallet(id)
@@ -52,9 +46,9 @@ const Table = () => {
               <td>{expense.tag}</td>
               <td>{expense.method}</td>
               <td>{expense.currency} {Number(expense.value).toFixed(2)}</td>
-              <td>{currencies.find(currency => expense.currency === currency.code)?.currencyName}</td>
-              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.info.ask))?.toFixed(2)}</td>
-              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.info.ask * expense.value))?.toFixed(2)}</td>
+              <td>{currencies.find(currency => expense.currency === currency.code)?.name}</td>
+              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask))?.toFixed(2)}</td>
+              <td>R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value))?.toFixed(2)}</td>
               <td>Real Brasileiro</td>
               <td>
                 <div>

@@ -80,51 +80,36 @@ function wallet(state = INITIAL_STATE, action) {
       }
     }
     case ActionType.PUSH_CURRENCIES_TO_WALLET: {
-      const currencies = [];
-      for (const expense of state.expenses) {
-        for (const result of Object.entries(expense.exchangeRates)) {
-          const value = result['1'];
-          if (expense.currency === value.code) {
-            currencies.push({
-              code: expense.currency,
-              currencyName: value.name,
-              info: value,
-            })
-            break
-          }
-        }
-      }
+      const currenciesFiltred = action.payload.data.filter(c => c.codein !== 'BRLT');
       return {
         ...state,
-        currencies,
+        currencies: currenciesFiltred
       }
     }
     case ActionType.CALCULE_TOTAL_VALUE: {
-      if (action.payload.data && state.expenses.length === 0) {
-        return {
-          ...state,
-          totalValue: action.payload.data.value
-        }
-      }
       if (action.payload.data && state.expenses.length !== 0) {
         const totalValue = state.expenses.reduce((previousValue, currentValue) => {
-          return Number(currentValue?.value) + previousValue
+          const exchangeValue = state.currencies.find(c => c.code === action.payload.data.currency);
+          const convertedValue = Number(currentValue.value) * exchangeValue.ask;
+          return convertedValue + previousValue;
         }, 0);
 
         return {
           ...state,
-          totalValue
+          totalValue: Number(totalValue).toFixed(2)
         }
       }
 
       if (action.payload.id && !action.payload.data) {
         const totalValue = state.expenses.reduce((previousValue, currentValue) => {
-          const { value } = currentValue
-          return Number(value) + previousValue
+          const { value, currency } = currentValue
+          const exchangeValue = state.currencies.find(c => c.code === currency);
+          const convertedValue = Number(value) * exchangeValue.ask;
+          return convertedValue + previousValue
         }, 0);
         return {
           ...state,
-          totalValue
+          totalValue: Number(totalValue).toFixed(2)
         }
       }
     }

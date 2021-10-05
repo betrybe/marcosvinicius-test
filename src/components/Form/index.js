@@ -34,7 +34,7 @@ function Form({ codes, tags, methods }) {
     dispatch(
       addItemToWallet(payload),
     );
-    dispatch(calculeTotalValue(null, payload.value))
+    dispatch(calculeTotalValue(null, payload))
     clearFields()
   }, [valor, code, descricao, tag, metodoPagamento, dispatch, clearFields])
 
@@ -55,9 +55,9 @@ function Form({ codes, tags, methods }) {
     );
 
     expense && (
-      dispatch(calculeTotalValue(null, payload.value))
+      dispatch(calculeTotalValue(null, payload))
     )
-  }, [dispatch, expenses, valor, code, descricao, tag, metodoPagamento])
+  }, [dispatch, expenses, valor, code, descricao, tag, metodoPagamento]);
 
   return (
     <Container isUpdate={isUpdated}>
