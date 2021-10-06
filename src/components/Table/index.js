@@ -46,41 +46,33 @@ const Table = () => {
               <td role="cell" aria-label={expense.tag}>{expense.tag}</td>
               <td role="cell" aria-label={expense.method}>{expense.method}</td>
 
-              {currencies?.length > 0 ? (
-               <td role="cell" aria-label={expense.value}>
-                {expense.currency} {Number(expense.value).toFixed(2)}
-              </td>
-              ) : (
-                <td role="cell">20</td>
-              )}
+              {
+                <td role="cell" aria-label={expense.value}>
+                  {expense.currency} {Number(expense.value).toFixed(2)}
+                </td>
+              }
 
-              {currencies?.length > 0 ? (
+              {
                 <td role="cell" aria-label={expense.value}>
                   {(currencies.find(currency => expense.currency === currency.code)?.name)}
                 </td>
-              ) : (
-                <td role="cell" aria-label="Euro">Euro</td>
-              )}
+              }
 
-              {currencies?.length > 0 ? (
+              {
                 <td role="cell" aria-label={
                   (Number(currencies.find(currency => expense.currency === currency.code)?.ask))
                 }>
                   R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask))?.toFixed(2)}
                 </td>
-              ) : (
-                <td role="cell" aria-label="4.20">R$ 4.20</td>
-              )}
+              }
 
-              {currencies?.length > 0 ? (
+              {
                 <td role="cell" aria-label={
                   (Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value))?.toFixed(2)
                 }>
                   R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value))?.toFixed(2)}
                 </td>
-              ) : (
-                <td role="cell" aria-label="420.41">R$ 420.41</td>
-              )}
+              }
 
               <td role="cell" aria-label="Real">Real</td>
               <td>

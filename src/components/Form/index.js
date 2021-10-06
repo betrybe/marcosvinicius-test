@@ -77,18 +77,9 @@ function Form({ codes, tags, methods }) {
         <div className="block">
           <label htmlFor="code">code: </label>
           <select aria-label="moeda" data-testid="currency-input" onChange={e => setCode(e.target.value)}>
-            {codes?.length > 0 ? (
-              codes.map(code => (
-                <option value={code} key={code}>{code}</option>
-              ))
-            ) : (
-              [
-                'USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC',
-                'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP',
-              ].map(code => (
-                <option value={code} key={code}>{code}</option>
-              ))
-            )}
+            {codes.map(code => (
+              <option value={code} key={code}>{code}</option>
+            ))}
           </select>
         </div>
 
