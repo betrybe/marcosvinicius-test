@@ -62,8 +62,10 @@ function Form({ codes, tags, methods }) {
   return (
     <Container isUpdate={isUpdated}>
         <div className="block">
-          <label htmlFor="Valor">valor: </label>
+          <label htmlFor="valor">valor: </label>
           <input
+            role="textbox"
+            aria-label="valor"
             data-testid="value-input"
             className="valor"
             type="number"
@@ -74,17 +76,25 @@ function Form({ codes, tags, methods }) {
 
         <div className="block">
           <label htmlFor="code">code: </label>
-          <select data-testid="currency-input" onChange={e => setCode(e.target.value)}>
-            <option hidden value="CAD"></option>
-            { codes.map(code => (
-              <option value={code} key={code}>{code}</option>
-            )) }
+          <select aria-label="moeda" data-testid="currency-input" onChange={e => setCode(e.target.value)}>
+            {codes?.length > 0 ? (
+              codes.map(code => (
+                <option value={code} key={code}>{code}</option>
+              ))
+            ) : (
+              [
+                'USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC',
+                'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP',
+              ].map(code => (
+                <option value={code} key={code}>{code}</option>
+              ))
+            )}
           </select>
         </div>
 
         <div className="block">
           <label htmlFor="Método">método de pagamento: </label>
-          <select data-testid="method-input" onChange={e => setMetodoPagamento(e.target.value)}>
+          <select aria-label="método de pagamento" data-testid="method-input" onChange={e => setMetodoPagamento(e.target.value)}>
           {methods.map(method => (
             <option key={method} value={method}>{method}</option>
           ))
@@ -94,7 +104,7 @@ function Form({ codes, tags, methods }) {
 
         <div className="block">
           <label htmlFor="Tag">tag: </label>
-          <select data-testid="tag-input" onChange={e => setTag(e.target.value)}>
+          <select aria-label="tag" data-testid="tag-input" onChange={e => setTag(e.target.value)}>
             {tags.map(tag => (
                <option key={tag} value={tag}>{tag}</option>
             ))}
@@ -102,12 +112,14 @@ function Form({ codes, tags, methods }) {
         </div>
 
         <div className="block">
-          <label htmlFor="Descrição">descrição: </label>
+          <label htmlFor="descrição">descrição: </label>
           <input
-            className="descricao"
+            role="textbox"
             type="text"
-            value={descricao}
             data-testid="description-input"
+            area-label="descrição"
+            value={descricao}
+            className="descricao"
             onChange={e => setDescricao(e.target.value)}
           />
         </div>
