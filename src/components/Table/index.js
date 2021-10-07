@@ -6,7 +6,7 @@ import {
   calculeTotalValue,
 } from '../../actions/wallet';
 
-import { Container, Thead, Tbody } from './styles';
+import './table.css';
 
 const Table = () => {
   const { expenses, currencies } = useSelector((state) => state.wallet);
@@ -28,8 +28,8 @@ const Table = () => {
   }, [dispatch]);
 
   return (
-    <Container>
-      <Thead>
+    <table className="table-container">
+      <thead className="Thead">
         <tr>
           <th role="columnheader">Descrição</th>
           <th role="columnheader">Tag</th>
@@ -41,8 +41,8 @@ const Table = () => {
           <th role="columnheader">Moeda de conversão</th>
           <th role="columnheader">Editar/Excluir</th>
         </tr>
-      </Thead>
-      <Tbody>
+      </thead>
+      <tbody className="Tbody">
         {
           expenses.map((expense) => (
             <tr key={ expense.id }>
@@ -204,8 +204,8 @@ const Table = () => {
             </tr>
           ))
         }
-      </Tbody>
-    </Container>
+      </tbody>
+    </table>
   );
 };
 

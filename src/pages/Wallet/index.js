@@ -8,12 +8,11 @@ import Table from '../../components/Table';
 import Form from '../../components/Form';
 
 function Wallet() {
+  const dispatch = useDispatch();
   const [codes, setCodes] = useState([
     'USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC',
     'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP',
   ]);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const getDataApi = async () => {

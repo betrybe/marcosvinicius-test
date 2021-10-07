@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-
-const Container = styled.header`
+.Container {
   background: #f4f4f4;
   width: 100%;
   position: relative;
@@ -9,35 +7,23 @@ const Container = styled.header`
   padding: 0 35px;
   align-items: center;
   justify-content: space-between;
-`;
+}
 
-const Block = styled.div`
+.Block {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 400px;
-`;
+}
 
-const Label = styled.label`
+.Label {
   font-size: 14px;
   font-weight: bold;
-`;
+}
 
-const Logo = styled.img`
+.Logo {
   position: relative;
   width: 100px;
   height: max-content;
-`;
+}
 
-const Div = styled.div``;
-
-const Span = styled.span``;
-
-export {
-  Container,
-  Block,
-  Label,
-  Logo,
-  Div,
-  Span,
-};

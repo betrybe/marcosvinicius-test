@@ -4,15 +4,7 @@ import { useDispatch } from 'react-redux';
 import { userLogin } from '../../actions/user';
 
 import TrybeLogo from '../../assets/trybe_logo.png';
-import {
-  FContainer,
-  FLogoContainer,
-  FBlock,
-  FInput,
-  FLogo,
-  FButon,
-  FErrorMessage,
-} from './styles';
+import './login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -62,12 +54,13 @@ function Login() {
   }, [email, senha, emailInvalido, senhaInvalida]);
 
   return (
-    <FContainer>
-      <FLogoContainer>
-        <FLogo alt="Trybe" src={ TrybeLogo } />
-      </FLogoContainer>
-      <FBlock>
-        <FInput
+    <div className="FContainer">
+      <div className="FLogoCotainer">
+        <img className="FLogo" alt="Trybe" src={ TrybeLogo } />
+      </div>
+      <div className="FBlock">
+        <input
+          className="FInput"
           type="email"
           name="email"
           placeholder="E-mail"
@@ -75,10 +68,11 @@ function Login() {
           onChange={ (e) => handleChangeEmail(e) }
           required
         />
-      </FBlock>
+      </div>
 
-      <FBlock>
-        <FInput
+      <div className="FBlock">
+        <input
+          className="FInput"
           type="password"
           name="password"
           placeholder="Senha"
@@ -86,23 +80,29 @@ function Login() {
           onChange={ (e) => handleChangePassword(e) }
           required
         />
-      </FBlock>
+      </div>
       {emailInvalido && (
-        <FErrorMessage>E-mail inválido</FErrorMessage>
+        <h4 className="FErrorMessage">E-mail inválido</h4>
       )}
       {senhaInvalida && (
-        <FErrorMessage>A senha não pode ser menor que 6 caracteres</FErrorMessage>
+        <h4 className="FErrorMessage">A senha não pode ser menor que 6 caracteres</h4>
       )}
 
-      <FButon
+      <button
+        style={
+          !formValido
+            ? { background: 'gray', cursor: 'not-allowed' }
+            : { background: 'linear-gradient(120deg, #3FB589, #000, #3FB589), 200% ',
+              cursor: 'pointer' }
+        }
+        className="FButon"
         type="button"
         disabled={ !formValido }
-        isDisabled={ !formValido }
         onClick={ submit }
       >
         Entrar
-      </FButon>
-    </FContainer>
+      </button>
+    </div>
   );
 }
 

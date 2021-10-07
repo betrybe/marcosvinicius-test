@@ -6,7 +6,8 @@ import {
   updateItemToWallet,
   calculeTotalValue,
 } from '../../actions/wallet';
-import { Container } from './styles';
+
+import './form.css';
 
 function Form({ codes, tags, methods }) {
   const [valor, setValor] = useState('');
@@ -63,7 +64,14 @@ function Form({ codes, tags, methods }) {
   }, [dispatch, expenses, valor, code, descricao, tag, metodoPagamento]);
 
   return (
-    <Container isUpdate={ isUpdated }>
+    <form
+      className="form-trybe"
+      style={
+        isUpdated
+          ? { background: '#3FB589' }
+          : { background: '#2E2E2E' }
+      }
+    >
       <div className="block">
         <label htmlFor="valor">valor: </label>
         <input
@@ -132,6 +140,11 @@ function Form({ codes, tags, methods }) {
       <div className="block">
         <button
           type="button"
+          style={
+            isUpdated
+              ? { background: '#252525' }
+              : { background: '#3FB589' }
+          }
           onClick={
             isUpdated
               ? () => handleUpdate(expenseId)
@@ -141,7 +154,7 @@ function Form({ codes, tags, methods }) {
           {isUpdated ? 'Editar despesa' : 'Adicionar despesa'}
         </button>
       </div>
-    </Container>
+    </form>
   );
 }
 

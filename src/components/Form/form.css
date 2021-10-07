@@ -1,0 +1,73 @@
+.form-trybe {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  padding: 25px 15px;
+  color: #fff;
+}
+
+.form-trybe .block {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form-trybe .block label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.form-trybe .block input {
+  padding: 12px 4px;
+  text-align: center;
+  width: max-content;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  box-shadow: 1px 2px 5px rgb(0 0 0);
+  transition: .25s;
+}
+
+.form-trybe .block input:focus {
+  box-shadow: 1px 2px 5px #F0E68C;
+}
+
+.form-trybe .block input .valor {
+  width: 100px
+}
+
+.form-trybe select {
+  transition: .25s;
+  padding: 12px 4px;
+  text-align: center;
+  width: max-content;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  box-shadow: 1px 2px 5px rgb(0 0 0);
+}
+
+.form-trybe select:focus {
+  box-shadow: 1px 2px 5px #F0E68C;
+}
+
+.form-trybe button {
+  background-size:200%;
+  padding: 12px 10px;
+  color: #fff;
+  text-align: center;
+  width: max-content;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 5px 15px rgba(0,0,0.1);
+  transition: .25s;
+}
+
+.form-trybe button:hover {
+  cursor: pointer;
+  background-position:right;
+}
