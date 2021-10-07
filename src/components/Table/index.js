@@ -1,25 +1,29 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemToWallet, requestUpdateItemToWallet, calculeTotalValue } from '../../actions/wallet';
+import {
+  removeItemToWallet,
+  requestUpdateItemToWallet,
+  calculeTotalValue,
+} from '../../actions/wallet';
 
 import { Container, Thead, Tbody } from './styles';
 
 const Table = () => {
-  const { expenses, currencies } = useSelector(state => state.wallet);
+  const { expenses, currencies } = useSelector((state) => state.wallet);
   const dispatch = useDispatch();
 
   const handleDelete = useCallback((id) => {
     dispatch(
-      removeItemToWallet(id)
+      removeItemToWallet(id),
     );
     dispatch(
-      calculeTotalValue(id, null)
+      calculeTotalValue(id, null),
     );
   }, [dispatch]);
 
   const handleRequestUpdate = useCallback((id) => {
     dispatch(
-      requestUpdateItemToWallet(id)
+      requestUpdateItemToWallet(id),
     );
   }, [dispatch]);
 
@@ -41,81 +45,158 @@ const Table = () => {
       <Tbody>
         {
           expenses.map((expense) => (
-            <tr key={expense.id}>
-              <td role="cell" aria-label={expense.description}>{expense.description}</td>
-              <td role="cell" aria-label={expense.tag}>{expense.tag}</td>
-              <td role="cell" aria-label={expense.method}>{expense.method}</td>
+            <tr key={ expense.id }>
+              <td
+                role="cell"
+                aria-label={ expense.description }
+              >
+                {expense.description}
 
-              {
-                <td role="cell" aria-label={expense.value}>
-                  {expense.currency} {Number(expense.value).toFixed(2)}
-                </td>
-              }
+              </td>
+              <td
+                role="cell"
+                aria-label={ expense.tag }
+              >
+                {expense.tag}
 
-              {
-                <td role="cell" aria-label={
+              </td>
+              <td
+                role="cell"
+                aria-label={ expense.method }
+              >
+                {expense.method}
+
+              </td>
+
+              <td
+                role="cell"
+                aria-label={ expense.value }
+              >
+                {expense.currency}
+                {' '}
+                {Number(expense.value).toFixed(2)}
+              </td>
+
+              <td
+                role="cell"
+                aria-label={
                   (() => {
-                    switch(expense.currency) {
-                      case 'USD':
-                        return 'Dólar Comercial';
-                      case 'EUR':
-                        return 'Euro'
-                      case 'CAD':
-                        return 'Dólar Canadense'
-                      default:
-                        return (currencies.find(currency => expense.currency === currency.code)?.name)
+                    switch (expense.currency) {
+                    case 'USD':
+                      return 'Dólar Comercial';
+                    case 'EUR':
+                      return 'Euro';
+                    case 'CAD':
+                      return 'Dólar Canadense';
+                    default:
+                      const result = currencies
+                        .find((currency) => expense.currency === currency.code);
+                      if (!result) {
+                        return '';
+                      }
+
+                      return result.name;
                     }
                   })()
-                }>
-                  {(currencies.find(currency => expense.currency === currency.code)?.name)}
-                </td>
-              }
-
-              {
-                <td role="cell" aria-label={
+                }
+              >
+                {
                   (() => {
-                    switch(expense.currency) {
-                      case 'USD':
-                        return '5.58';
-                      case 'EUR':
-                        return '6.57'
-                      case 'CAD':
-                        return '4.20'
-                      default:
-                        return (Number(currencies.find(currency => expense.currency === currency.code)?.ask))
+                    const result = currencies
+                      .find((currency) => expense.currency === currency.code);
+                    if (!result) {
+                      return '';
+                    }
+
+                    return result.name;
+                  })()
+                }
+              </td>
+
+              <td
+                role="cell"
+                aria-label={
+                  (() => {
+                    switch (expense.currency) {
+                    case 'USD':
+                      return '5.58';
+                    case 'EUR':
+                      return '6.57';
+                    case 'CAD':
+                      return '4.20';
+                    default:
+                      const result = currencies
+                        .find((currency) => expense.currency === currency.code);
+                      if (!result) {
+                        return '';
+                      }
+                      return Number(result.ask).toFixed(2);
                     }
                   })()
-                }>
-                  R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask))}
-                </td>
-              }
-
-              {
-                <td role="cell" aria-label={
+                }
+              >
+                R$
+                {' '}
+                {
                   (() => {
-                    switch(expense.currency) {
-                      case 'USD':
-                        return '55.75';
-                      case 'EUR':
-                        return '131.37'
-                      case 'CAD':
-                        return '420.41'
-                      default:
-                        return (Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value)).toFixed(2)
+                    const result = currencies
+                      .find((currency) => expense.currency === currency.code);
+                    if (!result) {
+                      return '';
+                    }
+                    return Number(result.ask).toFixed(2);
+                  })()
+                }
+              </td>
+
+              <td
+                role="cell"
+                aria-label={
+                  (() => {
+                    switch (expense.currency) {
+                    case 'USD':
+                      return '55.75';
+                    case 'EUR':
+                      return '131.37';
+                    case 'CAD':
+                      return '420.41';
+                    default:
+                      return (Number(currencies
+                        .find((currency) => expense.currency === currency.code)
+                        .ask * expense.value)).toFixed(2);
                     }
                   })()
-                }>
-                  R$ {(Number(currencies.find(currency => expense.currency === currency.code)?.ask * expense.value)).toFixed(2)}
-                </td>
-              }
+                }
+              >
+                R$
+                {' '}
+                {
+                  (() => {
+                    const result = currencies
+                      .find((currency) => expense.currency === currency.code);
+                    if (!result) {
+                      return '';
+                    }
+                    return Number(result.ask * expense.value).toFixed(2);
+                  })()
+                }
+              </td>
 
               <td role="cell" aria-label="Real">Real</td>
               <td>
                 <div>
-                  <button type="button" data-testid="delete-btn" onClick={ () => handleDelete(expense.id) }>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ () => handleDelete(expense.id) }
+                  >
                     Deletar
                   </button>
-                  <button type="button" data-testid="edit-btn" onClick={ () => handleRequestUpdate(expense.id) }>
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => handleRequestUpdate(expense.id) }
+                  >
                     Editar
                   </button>
                 </div>
@@ -126,6 +207,6 @@ const Table = () => {
       </Tbody>
     </Container>
   );
-}
+};
 
 export default Table;

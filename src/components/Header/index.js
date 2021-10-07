@@ -8,23 +8,23 @@ import {
   Label,
   Logo,
   Div,
-  Span
+  Span,
 
 } from './styles';
 
 function Header() {
-  const { totalValue } = useSelector(state => state.wallet);
-  const { email } = useSelector(state => state.user);
+  const { totalValue } = useSelector((state) => state.wallet);
+  const { email } = useSelector((state) => state.user);
 
   return (
     <Container>
-      <Logo src={TrybeLogo} />
+      <Logo src={ TrybeLogo } />
       <Block>
-      <Label>E-mail</Label>
-      <Label data-testid="email-field">{email}</Label>
+        <Label>E-mail</Label>
+        <Label data-testid="email-field">{email}</Label>
         <Div>
           <Span>
-            <Label>Despesa Total R$:</Label>
+            <Label>Despesa Total R$: </Label>
             <Label data-testid="total-field">
               {totalValue || '0.00'}
             </Label>

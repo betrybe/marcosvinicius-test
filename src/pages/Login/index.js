@@ -11,14 +11,10 @@ import {
   FInput,
   FLogo,
   FButon,
-  FErrorMessage
+  FErrorMessage,
 } from './styles';
 
 function Login() {
-  const patternEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  const patternSenha = /^.{5,}$/;
-
-
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [senhaInvalida, setSenhaInvalida] = useState(false);
@@ -36,22 +32,24 @@ function Login() {
   }, [dispatch, email, formValido, history]);
 
   const handleChangePassword = useCallback((e) => {
+    const patternSenha = /^.{5,}$/;
     setSenha(e.target.value);
     if (patternSenha.test(senha)) {
       setSenhaInvalida(false);
     } else {
       setSenhaInvalida(true);
     }
-  }, [senha, patternSenha]);
+  }, [senha]);
 
   const handleChangeEmail = useCallback((e) => {
+    const patternEmail = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     setEmail(e.target.value);
     if (patternEmail.test(email)) {
       setEmailInvalido(false);
     } else {
       setEmailInvalido(true);
     }
-  }, [email, patternEmail]);
+  }, [email]);
 
   useEffect(() => {
     if (email !== '' && senha !== '') {
@@ -61,13 +59,12 @@ function Login() {
         setFormValido(true);
       }
     }
-
   }, [email, senha, emailInvalido, senhaInvalida]);
 
   return (
     <FContainer>
       <FLogoContainer>
-        <FLogo alt={"Trybe"} src={TrybeLogo} />
+        <FLogo alt="Trybe" src={ TrybeLogo } />
       </FLogoContainer>
       <FBlock>
         <FInput
@@ -75,7 +72,7 @@ function Login() {
           name="email"
           placeholder="E-mail"
           data-testid="email-input"
-          onChange={e => handleChangeEmail(e)}
+          onChange={ (e) => handleChangeEmail(e) }
           required
         />
       </FBlock>
@@ -86,7 +83,7 @@ function Login() {
           name="password"
           placeholder="Senha"
           data-testid="password-input"
-          onChange={e => handleChangePassword(e)}
+          onChange={ (e) => handleChangePassword(e) }
           required
         />
       </FBlock>
@@ -97,7 +94,12 @@ function Login() {
         <FErrorMessage>A senha não pode ser menor que 6 caracteres</FErrorMessage>
       )}
 
-      <FButon type="button" disabled={!formValido} isDisabled={!formValido} onClick={ submit }>
+      <FButon
+        type="button"
+        disabled={ !formValido }
+        isDisabled={ !formValido }
+        onClick={ submit }
+      >
         Entrar
       </FButon>
     </FContainer>

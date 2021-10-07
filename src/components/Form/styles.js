@@ -5,7 +5,7 @@ const Container = styled.form`
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
   align-items: center;
-  background: ${props => props.isUpdate ? '#3FB589' : '#2E2E2E'};
+  background: ${(props) => (props.isUpdate ? '#3FB589' : '#2E2E2E')};
   padding: 25px 15px;
   color: #fff;
 
@@ -58,7 +58,9 @@ const Container = styled.form`
   }
 
   button {
-    background: ${props => props.isUpdate ? 'linear-gradient(120deg, #000, #252525, #252525)' : 'linear-gradient(120deg, #3FB589, #252525, #3FB589)'} ;
+    background: ${(props) => (props.isUpdate
+    ? 'linear-gradient(120deg, #000, #252525, #252525)'
+    : 'linear-gradient(120deg, #3FB589, #252525, #3FB589)')} ;
     background-size:200%;
     padding: 12px 10px;
     color: #fff;
@@ -78,4 +80,4 @@ const Container = styled.form`
 
 export {
   Container,
-}
+};

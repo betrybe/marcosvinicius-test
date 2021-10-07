@@ -65,8 +65,11 @@ const FButon = styled.button`
   border:none;
   border-radius: 4px;
   outline:none;
-  cursor: ${props => props.isDisabled ? 'not-allowed' : 'pointer'};
-  background: ${props => props.isDisabled ? 'gray' : 'linear-gradient(120deg, #3FB589, #000, #3FB589)'};
+  cursor: ${(props) => (props.isDisabled ? 'not-allowed' : 'pointer')};
+  background: ${(props) => (props.isDisabled
+    ? 'gray'
+    : 'linear-gradient(120deg, #3FB589, #000, #3FB589)'
+  )};
   background-size:200%;
 
   &:hover{
@@ -80,7 +83,6 @@ const FErrorMessage = styled.h4`
   transition: .25s linear;
 `;
 
-
 export {
   FContainer,
   FInput,
@@ -88,5 +90,5 @@ export {
   FLogoContainer,
   FLogo,
   FButon,
-  FErrorMessage
+  FErrorMessage,
 };

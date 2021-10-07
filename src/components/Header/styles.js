@@ -39,5 +39,5 @@ export {
   Label,
   Logo,
   Div,
-  Span
-}
+  Span,
+};

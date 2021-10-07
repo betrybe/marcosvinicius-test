@@ -4,14 +4,25 @@
     "es2020": true
   },
   "rules": {
-    "prefer-default-export": "off"
+    "prefer-default-export": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/prop-types": "off",
+    "no-unused-expressions": "off",
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "no-magic-numbers": "off",
+    "react-func/max-lines-per-function": "off",
+    "no-case-declarations": "off",
+    "sonarjs/cognitive-complexity": "off"
   },
   "extends": [
     "trybe-frontend"
   ],
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "ecmaVersion": 2020
     },
     "sourceType": "module"
   }

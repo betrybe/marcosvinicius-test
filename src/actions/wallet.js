@@ -4,34 +4,34 @@ export const ActionType = {
   UPDATE_ITEM_TO_WALLET: '@UPDATE_ITEM_TO_WALLET',
   REQUEST_UPDATE_ITEM_TO_WALLET: '@REQUEST_UPDATE_ITEM_TO_WALLET',
   PUSH_CURRENCIES_TO_WALLET: '@PUSH_CURRENCIES_TO_WALLET',
-  CALCULE_TOTAL_VALUE: '@CALCULE_TOTAL_VALUE'
-}
+  CALCULE_TOTAL_VALUE: '@CALCULE_TOTAL_VALUE',
+};
 
 export function addItemToWallet(data) {
   return {
     type: ActionType.ADD_ITEM_TO_WALLET,
     payload: {
-      data
-    }
-  }
+      data,
+    },
+  };
 }
 
 export function removeItemToWallet(id) {
   return {
     type: ActionType.REMOVE_ITEM_TO_WALLET,
     payload: {
-      id
-    }
-  }
+      id,
+    },
+  };
 }
 
 export function requestUpdateItemToWallet(id) {
   return {
     type: ActionType.REQUEST_UPDATE_ITEM_TO_WALLET,
     payload: {
-      id
-    }
-  }
+      id,
+    },
+  };
 }
 
 export function updateItemToWallet(id, data) {
@@ -39,18 +39,18 @@ export function updateItemToWallet(id, data) {
     type: ActionType.UPDATE_ITEM_TO_WALLET,
     payload: {
       id,
-      data
-    }
-  }
+      data,
+    },
+  };
 }
 
 export function pushCurrenciesToWallet(data) {
   return {
     type: ActionType.PUSH_CURRENCIES_TO_WALLET,
     payload: {
-      data
-    }
-  }
+      data,
+    },
+  };
 }
 
 export function calculeTotalValue(id, data) {
@@ -58,7 +58,7 @@ export function calculeTotalValue(id, data) {
     type: ActionType.CALCULE_TOTAL_VALUE,
     payload: {
       id,
-      data
-    }
-  }
+      data,
+    },
+  };
 }
