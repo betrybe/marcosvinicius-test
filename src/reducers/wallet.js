@@ -3,7 +3,7 @@ import { ActionType } from '../actions/wallet';
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  totalValue: 0,
+  totalValue: 0.0,
   isUpdated: false,
   expenseId: null
 };
@@ -89,8 +89,9 @@ function wallet(state = INITIAL_STATE, action) {
     case ActionType.CALCULE_TOTAL_VALUE: {
       if (action.payload.data && state.expenses.length !== 0) {
         const totalValue = state.expenses.reduce((previousValue, currentValue) => {
-          const exchangeValue = state.currencies.find(c => c.code === action.payload.data.currency);
-          const convertedValue = Number(currentValue.value) * exchangeValue?.ask;
+          const { value, currency } = currentValue
+          const exchangeValue = state.currencies.find(c => c.code === currency);
+          const convertedValue = Number(value) * Number(exchangeValue?.ask);
           return convertedValue + previousValue;
         }, 0);
 

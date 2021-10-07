@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import TrybeLogo from '../../assets/trybe_logo.png';
 import {
@@ -11,7 +12,10 @@ import {
 
 } from './styles';
 
-function Header({ email, totalValue }) {
+function Header() {
+  const { totalValue } = useSelector(state => state.wallet);
+  const { email } = useSelector(state => state.user);
+
   return (
     <Container>
       <Logo src={TrybeLogo} />
@@ -20,8 +24,10 @@ function Header({ email, totalValue }) {
       <Label data-testid="email-field">{email}</Label>
         <Div>
           <Span>
-          <Label>Despesa Total: R$: </Label>
-            <Label data-testid="total-field">{totalValue ? totalValue : 0}</Label>
+            <Label>Despesa Total R$:</Label>
+            <Label data-testid="total-field">
+              {totalValue || '0.00'}
+            </Label>
           </Span>
           <Label data-testid="header-currency-field">BRL</Label>
         </Div>

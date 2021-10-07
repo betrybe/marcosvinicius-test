@@ -1,35 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { pushCurrenciesToWallet } from '../../actions/wallet'
-
-import api from '../../services/api';
+import { distinct } from '../../utils/distinct'
 
 import Header from '../../components/Header'
 import Table from '../../components/Table'
 import Form from '../../components/Form'
 
 function Wallet() {
-  const [codes, setCodes] = useState([]);
+  const [codes, setCodes] = useState([
+    'USD', 'CAD', 'EUR', 'GBP', 'ARS', 'BTC', 'LTC',
+    'JPY', 'CHF', 'AUD', 'CNY', 'ILS', 'ETH', 'XRP'
+  ]);
 
   const dispatch = useDispatch();
-  const { email } = useSelector(state => state.user);
-  const { totalValue, currencies } = useSelector(state => state.wallet);
 
   useEffect(() => {
-    api.get('/').then(currency => {
-      const result = currency.data
-      dispatch(pushCurrenciesToWallet(Object.values(result)));
+    const getDataApi = async () => {
+      try {
+        const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+        if (!response.ok) {
+          throw new Error()
+        }
+        const data = await response.json();
+        return data;
+
+      } catch {
+        console.log('falha ao chamar api')
+      }
+    }
+
+    getDataApi().then(currencies => {
+      const info = Object.values(currencies);
+      const codes = info.map(item => item.code);
+      const codesFiltred = codes.filter(distinct);
+      setCodes(codesFiltred);
+      dispatch(pushCurrenciesToWallet(Object.values(currencies)));
     })
   }, [dispatch]);
 
-  useEffect(() => {
-    const codes = currencies.map(currency => currency.code);
-    setCodes(codes);
-  }, [currencies]);
-
   return (
     <>
-      <Header email={email} totalValue={totalValue} />
+      <Header />
       <Form
         codes={codes}
         methods={[

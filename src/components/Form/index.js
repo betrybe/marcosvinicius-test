@@ -2,8 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addItemToWallet, updateItemToWallet, calculeTotalValue } from '../../actions/wallet';
-import api from '../../services/api';
-
 import { Container } from './styles';
 
 function Form({ codes, tags, methods }) {
@@ -22,7 +20,8 @@ function Form({ codes, tags, methods }) {
   }, []);
 
   const handleAddItem = useCallback(async () => {
-    const { data } = await api.get('/')
+    const response = await fetch('https://economia.awesomeapi.com.br/json/all')
+    const data = await response.json();
     const payload = {
       value: valor,
       description: descricao,
@@ -64,7 +63,6 @@ function Form({ codes, tags, methods }) {
         <div className="block">
           <label htmlFor="valor">valor: </label>
           <input
-            role="textbox"
             aria-label="valor"
             data-testid="value-input"
             className="valor"
@@ -78,7 +76,7 @@ function Form({ codes, tags, methods }) {
           <label htmlFor="code">code: </label>
           <select aria-label="moeda" data-testid="currency-input" onChange={e => setCode(e.target.value)}>
             {codes.map(code => (
-              <option value={code} key={code}>{code}</option>
+              <option key={code} value={code}>{code}</option>
             ))}
           </select>
         </div>
@@ -86,9 +84,10 @@ function Form({ codes, tags, methods }) {
         <div className="block">
           <label htmlFor="Método">método de pagamento: </label>
           <select aria-label="método de pagamento" data-testid="method-input" onChange={e => setMetodoPagamento(e.target.value)}>
-          {methods.map(method => (
-            <option key={method} value={method}>{method}</option>
-          ))
+          {
+            methods.map(method => (
+              <option key={method} value={method}>{method}</option>
+            ))
           }
           </select>
         </div>
@@ -105,10 +104,9 @@ function Form({ codes, tags, methods }) {
         <div className="block">
           <label htmlFor="descrição">descrição: </label>
           <input
-            role="textbox"
             type="text"
             data-testid="description-input"
-            area-label="descrição"
+            aria-label="descrição"
             value={descricao}
             className="descricao"
             onChange={e => setDescricao(e.target.value)}
