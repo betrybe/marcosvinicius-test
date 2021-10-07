@@ -1,0 +1,29 @@
+.Container {
+  background: #f4f4f4;
+  width: 100%;
+  position: relative;
+  display: flex;
+  height: 70px;
+  padding: 0 35px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+}
+
+.Label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.Logo {
+  position: relative;
+  width: 100px;
+  height: max-content;
+}
+
